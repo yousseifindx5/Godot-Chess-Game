@@ -1,0 +1,142 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6lcntojl4qnu"]
+
+[ext_resource type="Script" uid="uid://db3i2wumhhk8w" path="res://Scripts/Options.gd" id="1_wjd6c"]
+[ext_resource type="Texture2D" uid="uid://bw3k2mbkylo35" path="res://Assets/Graphics/Bg.jpg" id="2_q4at1"]
+[ext_resource type="FontFile" uid="uid://dhdidsdjlutn5" path="res://Assets/Fonts/pixel_font.ttf" id="3_6f4k2"]
+[ext_resource type="Script" uid="uid://bugi5or47llt1" path="res://Scripts/Buttons.gd" id="4_bdxpv"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hcxxy"]
+texture = ExtResource("2_q4at1")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ur25d"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjd6c"]
+bg_color = Color(0.32026872, 0.59753627, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0126h"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4lp62"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 3
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wjd6c")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1161.0
+offset_bottom = 658.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_hcxxy")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -224.0
+offset_top = -191.0
+offset_right = 224.0
+offset_bottom = 191.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ur25d")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -192.0
+offset_top = -96.0
+offset_right = 192.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+
+[node name="1" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_6f4k2")
+theme_override_font_sizes/font_size = 28
+text = "Music:"
+
+[node name="MusicContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/MusicContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_wjd6c")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicValue" type="Label" parent="VBoxContainer/MusicContainer"]
+layout_mode = 2
+
+[node name="2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_6f4k2")
+theme_override_font_sizes/font_size = 28
+text = "SFX:"
+
+[node name="SfxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/SfxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_wjd6c")
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXValue" type="Label" parent="VBoxContainer/SfxContainer"]
+layout_mode = 2
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 81)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_6f4k2")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_0126h")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4lp62")
+text = "Back"
+icon_alignment = 1
+script = ExtResource("4_bdxpv")
+
+[connection signal="value_changed" from="VBoxContainer/MusicContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SfxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_exit_pressed"]
